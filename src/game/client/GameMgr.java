@@ -4,11 +4,21 @@ import game.*;
 
 import java.util.List;
 
+/**
+ * Class for game
+ */
 public class GameMgr {
     GearList mGearList; // a list of gear items
     Player player1;
     Player player2;
 
+    /**
+     * Constructor throw exception if invalid inpu
+     * @param items
+     * @param player1
+     * @param player2
+     */
+    //todo where do we check gearList size is 10?
     public GameMgr(List<AbstractGear> items, Player player1, Player player2) {
         if (items == null || player1 == null || player2 == null) {
             throw new IllegalArgumentException();
@@ -18,6 +28,9 @@ public class GameMgr {
         this.player2 = player2;
     }
 
+    /**
+     * two players take turns to choose gear; print result based on defense and attack
+     */
     public void startGame() {
         int damageP1 = 0, damageP2 = 0;
         //The two players take turns to dress themselves
@@ -43,10 +56,17 @@ public class GameMgr {
         }
     }
 
+    /**
+     * Getter method
+     * @return
+     */
     public Player getPlayer1() {
         return player1;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public Player getPlayer2() {
         return player2;
     }

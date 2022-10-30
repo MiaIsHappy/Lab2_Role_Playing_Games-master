@@ -7,15 +7,26 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.DoubleBinaryOperator;
 
+/**
+ * Characters go into battle with some degree of attack and defense capabilities
+ */
+//todo I changed attack, defense to final;
 public class Player {
     private String name;
-    private int attack;
-    private int defense;
+    final int attack;
+    final int defense;
     private int totalAttack;
     private int totalDefense;
     private HeadGear mHeadGear;
     private List<HandGear> mHandGear = new ArrayList<>();
     private List<Footwear> mFootwear = new ArrayList<>();
+
+    /**
+     *
+     * @param name
+     * @param attack
+     * @param defense
+     */
 
     public Player(String name, int attack, int defense) {
         this.name = name;
@@ -37,8 +48,10 @@ public class Player {
      * <p>
      * Rule 4: if there is yet still a tie after Rule 1,2,3, pick a random one.
      */
+    //todo I try to understand the rational behind putting pickup and wearSelfFrom in player classes
     public void pickUp(GearList gearList) {
         // 1.check the head slot first
+        //todo not sure if I understand the 2nd part of if statements
         if ((isHeadSlotEmpty() && gearList.getHeadWear().size() > 0)
                 || (gearList.getFootWear().size() == 0 && gearList.getHandWear().size() == 0)) {
             wearSelfFrom(gearList.getHeadWear(), gearList);
@@ -49,16 +62,28 @@ public class Player {
             // 3.last check the foot slot
         } else if ((isHeadSlotEmpty() && gearList.getHeadWear().size() > 0)
                 || (gearList.getFootWear().size() == 0 && gearList.getHandWear().size() == 0)) {
+            //todo is this supposed to be getFootWear?
             wearSelfFrom(gearList.getHeadWear(), gearList);
         }
     }
 
+    /**
+     *Pick the top gear from the gear toolkit, and remove the top gear from the choise list
+     * @param gears
+     * @param gearList
+     */
     private void wearSelfFrom(List<AbstractGear> gears, GearList gearList) {
         AbstractGear preferredGear = getPreferredGear(gears);
         wear(preferredGear);
         gearList.remove(preferredGear);
     }
 
+    /**
+     *
+     * @param gear
+     */
+
+    //todo question if we check instanceof here, do we still need in combine method?
     private void wear(AbstractGear gear) {
         if (gear instanceof HeadGear) {
             if (!isHeadSlotEmpty()) {
@@ -88,59 +113,107 @@ public class Player {
         this.totalAttack += gear.getAttackStrength();
     }
 
+    /**
+     * Sort gears and find the max
+     * @param gears
+     * @return
+     */
     private AbstractGear getPreferredGear(List<AbstractGear> gears) {
         Optional<AbstractGear> preferredGear = gears.stream().sorted().findFirst();
         return preferredGear.get();
     }
 
+
+    /**
+     * Check if empty
+     * @return
+     */
     private boolean isHeadSlotEmpty() {
         return mHeadGear == null;
     }
 
+    /**
+     * Check if full
+     * @return
+     */
     private boolean isHandSlotNotFull() {
         return mHandGear.size() < 2;
     }
-
+    /**
+     * Check if full
+     * @return
+     */
     private boolean isFootSlotNotFull() {
         return mFootwear.size() < 2;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public int getAttack() {
         return attack;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public int getDefense() {
         return defense;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public int getTotalAttack() {
         return totalAttack;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public int getTotalDefense() {
         return totalDefense;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public HeadGear getHeadGear() {
         return mHeadGear;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public List<HandGear> getHandGear() {
         return mHandGear;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public List<Footwear> getFootwear() {
         return mFootwear;
     }
-
+    /**
+     * Getter method
+     * @return
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * toString method
+     * @return
+     */
     @Override
     public String toString() {
         //tom: xx headWear1, xx handWear1
@@ -165,6 +238,11 @@ public class Player {
         return sb.toString();
     }
 
+    /**
+     * Equals method for player
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
