@@ -80,7 +80,7 @@ public abstract class AbstractGear implements Gear, Comparable<AbstractGear> {
      * @param obj
      * @return
      */
-    //todo why use object type
+    //todo why do we need equals
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof AbstractGear) {

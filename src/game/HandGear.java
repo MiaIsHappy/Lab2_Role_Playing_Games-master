@@ -15,7 +15,7 @@ public class HandGear extends AbstractGear {
      * @param gear
      * @return
      */
-    //todo this is very similar to other combine method. change to method without instanceof in abstract class, if we check instanceof in play?
+    //todo same with all 3 this is very similar to other combine method. change to method without instanceof in abstract class, if we check instanceof in play?
     @Override
     public Gear combine(Gear gear) {
         if (gear instanceof HandGear) {
