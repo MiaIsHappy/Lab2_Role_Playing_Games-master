@@ -4,7 +4,12 @@ package game;
  * Interface all gears has combine
  */
 
-//todo do we need to add all methods in abstractGear to interface?
 public interface Gear{
+
+    /**
+     * combines the powers and name if they are the same type
+     * @param gear
+     * @return
+     */
     Gear combine(Gear gear);
 }

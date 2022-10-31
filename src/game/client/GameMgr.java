@@ -13,14 +13,13 @@ public class GameMgr {
     Player player2;
 
     /**
-     * Constructor throw exception if invalid inpu
+     * Constructor throw exception if invalid input
      * @param items
      * @param player1
      * @param player2
      */
-    //todo where do we check gearList size is 10?
     public GameMgr(List<AbstractGear> items, Player player1, Player player2) {
-        if (items == null || player1 == null || player2 == null) {
+        if (items == null || items.size() != 10 || player1 == null || player2 == null ) {
             throw new IllegalArgumentException();
         }
         this.mGearList = new GearList(items);
@@ -29,9 +28,14 @@ public class GameMgr {
     }
 
     /**
-     * two players take turns to choose gear; print result based on defense and attack
+     * two players take turns to choose gear;
+     * return result based on damage
+     * @return
+     *      1  - play1 wins;
+     *      2  - play2 wins;
+     *      0  - tie;
      */
-    public void startGame() {
+    public int startGame() {
         int damageP1 = 0, damageP2 = 0;
         //The two players take turns to dress themselves
         for (int i = 0; i < 5; i++) {
@@ -47,12 +51,17 @@ public class GameMgr {
             damageP2 = player1.getTotalAttack() - player2.getTotalDefense();
         }
         System.out.println("================" + " Results " + "================");
+        System.out.println("player1 total damage: " + damageP1);
+        System.out.println("player2 total damage: " + damageP2);
         if (damageP1 < damageP2) {
             System.out.println("Player1 wins");
+            return 1;
         } else if (damageP1 > damageP2) {
             System.out.println("Player2 wins");
+            return 2;
         } else {
             System.out.println("A tie");
+            return 0;
         }
     }
 

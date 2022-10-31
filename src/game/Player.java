@@ -10,11 +10,10 @@ import java.util.function.DoubleBinaryOperator;
 /**
  * Characters go into battle with some degree of attack and defense capabilities
  */
-//todo I changed attack, defense to final;
 public class Player {
     private String name;
-    final int attack;
-    final int defense;
+    private final int attack;
+    private final int defense;
     private int totalAttack;
     private int totalDefense;
     private HeadGear mHeadGear;
@@ -48,10 +47,8 @@ public class Player {
      * <p>
      * Rule 4: if there is yet still a tie after Rule 1,2,3, pick a random one.
      */
-    //todo I try to understand the rational behind putting pickup and wearSelfFrom in player classes
     public void pickUp(GearList gearList) {
         // 1.check the head slot first
-        //todo not sure if I understand the 2nd part of if statements
         if ((isHeadSlotEmpty() && gearList.getHeadWear().size() > 0)
                 || (gearList.getFootWear().size() == 0 && gearList.getHandWear().size() == 0)) {
             wearSelfFrom(gearList.getHeadWear(), gearList);
@@ -60,15 +57,14 @@ public class Player {
                 || (gearList.getFootWear().size() == 0 && gearList.getHeadWear().size() == 0)) {
             wearSelfFrom(gearList.getHandWear(), gearList);
             // 3.last check the foot slot
-        } else if ((isHeadSlotEmpty() && gearList.getHeadWear().size() > 0)
-                || (gearList.getFootWear().size() == 0 && gearList.getHandWear().size() == 0)) {
-            //todo is this supposed to be getFootWear?
-            wearSelfFrom(gearList.getHeadWear(), gearList);
+        } else if ((isFootSlotNotFull() && gearList.getFootWear().size() > 0)
+                || (gearList.getHeadWear().size() == 0 && gearList.getHandWear().size() == 0)) {
+            wearSelfFrom(gearList.getFootWear(), gearList);
         }
     }
 
     /**
-     *Pick the top gear from the gear toolkit, and remove the top gear from the choise list
+     *Pick the top gear from the gear toolkit, and remove the top gear from the choose list
      * @param gears
      * @param gearList
      */
@@ -79,11 +75,9 @@ public class Player {
     }
 
     /**
-     *
+     * Wear the gear
      * @param gear
      */
-
-    //todo question if we check instanceof here, do we still need in combine method?
     private void wear(AbstractGear gear) {
         if (gear instanceof HeadGear) {
             if (!isHeadSlotEmpty()) {
@@ -212,12 +206,14 @@ public class Player {
 
     /**
      * toString method
+     * Example:
+     *         tom: xx headWear1, xx handWear1
+     *         Attack Strength: xx, Defense Strength: xx
      * @return
      */
     @Override
     public String toString() {
-        //tom: xx headWear1, xx handWear1
-        //Attack Strength: xx, Defense Strength: xx
+
         StringBuilder sb = new StringBuilder();
         sb.append(this.getName()).append(", ");
         sb.append("HeadGear: ");

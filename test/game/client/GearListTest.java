@@ -20,12 +20,12 @@ public class GearListTest {
     @Before
     public void setUp() throws Exception {
         gears = new ArrayList<>();
-        HeadGear headGear1 = new HeadGear("11", "headGear1", 9, 8);
-        HeadGear headGear2 = new HeadGear("22", "headGear2", 9, 7);
-        Footwear footWear1 = new Footwear("Handsome", "Boots", 10, 10);
-        Footwear footWear2 = new Footwear("Happy", "Sandals", 15, 15);
-        HandGear handGear1 = new HandGear("Red", "Gloves", 10, 0);
-        HandGear handGear2 = new HandGear("Quick", "Swords", 10, 0);
+        HeadGear headGear1 = new HeadGear("11", "headGear1", 9, 0);
+        HeadGear headGear2 = new HeadGear("22", "headGear2", 9, 0);
+        Footwear footWear1 = new Footwear("Handsome", "Boots", 10, 0);
+        Footwear footWear2 = new Footwear("Happy", "Sandals", 15, 0);
+        HandGear handGear1 = new HandGear("Red", "Gloves", 0, 10);
+        HandGear handGear2 = new HandGear("Quick", "Swords", 0, 10);
 
         gears.add(headGear1);
         gears.add(headGear2);

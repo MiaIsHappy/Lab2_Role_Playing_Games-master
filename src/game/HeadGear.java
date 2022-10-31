@@ -12,25 +12,19 @@ public class HeadGear extends AbstractGear {
      * @param defenseStrength
      * @param attackStrength
      */
-    //todo attack default to 0; I made changes but tbd
-    public HeadGear(String firstWordOfName, String secondWordOfName, int defenseStrength) {
-        super(firstWordOfName, secondWordOfName, defenseStrength, 0);
+    public HeadGear(String firstWordOfName, String secondWordOfName, int defenseStrength, int attackStrength) {
+        super(firstWordOfName, secondWordOfName, defenseStrength, attackStrength);
+        //These items go on the character’s head (hats/helmets/visors) and are only useful for defense.
+        if (attackStrength != 0) throw new IllegalArgumentException();
     }
 
-    //todo same todo with others
     @Override
     public Gear combine(Gear gear) {
         if (gear instanceof HeadGear) {
-            HeadGear otherHeadGear = (HeadGear) gear;
-            String newFirstWordOfName = this.getFirstWordOfName() + "," + otherHeadGear.getFirstWordOfName();
-            String newSecondWordOfName = otherHeadGear.getSecondWordOfName();
-            int newDefenseStrength = this.getDefenseStrength() + otherHeadGear.getDefenseStrength();
-            int newAttackStrength = this.getAttackStrength() + otherHeadGear.getAttackStrength();
-            HeadGear newHeadGear = new HeadGear(newFirstWordOfName, newSecondWordOfName, newDefenseStrength);
-
-            return newHeadGear;
-
+            combineGearHelper((AbstractGear) gear);
+            return this;
         }
+        System.out.println("The Gear is not HeadGear");
         return null;
     }
 }

@@ -62,7 +62,8 @@ public abstract class AbstractGear implements Gear, Comparable<AbstractGear> {
     }
 
     /**
-     * Compare strength in battle
+     * Compare the gears by attackStrength
+     * if it's same, then compare them by defenseStrength
      * @param otherGear
      * @return
      */
@@ -80,7 +81,6 @@ public abstract class AbstractGear implements Gear, Comparable<AbstractGear> {
      * @param obj
      * @return
      */
-    //todo why do we need equals
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof AbstractGear) {
@@ -98,4 +98,17 @@ public abstract class AbstractGear implements Gear, Comparable<AbstractGear> {
     public String toString() {
         return getFirstWordOfName() + " " + getSecondWordOfName();
     }
+
+    /**
+     * Combine the same type gear and return the new combined gear
+     * @param otherHeadGear
+     * @return
+     */
+    public void combineGearHelper(AbstractGear otherHeadGear) {
+        this.firstWordOfName = this.getFirstWordOfName() + "," + otherHeadGear.getFirstWordOfName();
+        this.secondWordOfName = otherHeadGear.getSecondWordOfName();
+        this.defenseStrength = this.getDefenseStrength() + otherHeadGear.getDefenseStrength();
+        this.attackStrength = this.getAttackStrength() + otherHeadGear.getAttackStrength();
+    }
+
 }
